@@ -1,0 +1,1 @@
+INSERT INTO `business_settings` (`key`, `value`, `created_at`, `updated_at`) VALUES ('zender_gateway', '{\"status\": \"0\", \"site_url\": null, \"api_key\": null, \"service\": null, \"whatsapp\": null, \"device\": null, \"gateway\": null, \"slot\": null, \"otp_template\": \"Your otp is #OTP#\"}', NULL, NULL);
