@@ -26,6 +26,6 @@ This modification is very easy to install. It is basically modified controller f
 
 5. All done!
 
-## Notes
+## Disclaimer
 
 Titan Systems is in no way affiliated with the author of StackFood script, please use this modification in your own discretion.
