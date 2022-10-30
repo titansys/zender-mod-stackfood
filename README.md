@@ -25,3 +25,7 @@ This modification is very easy to install. It is basically modified controller f
 4. Configure Zender in the StackFood admin SMS module settings.
 
 5. All done!
+
+## Notes
+
+Titan Systems is in no way affiliated with the author of StackFood script, please use this modification in your own discretion.
