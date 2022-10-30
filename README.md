@@ -16,7 +16,7 @@ StackFood is a complete Multi Restaurant food delivery system developed using La
 
 This modification is very easy to install. It is basically modified controller files of the default script files.
 
-1. Download the latest zip file from [here](https://github.com/titansys/zender-mod-stackfood/releases).
+1. Download the latest release.zip file from [here](https://github.com/titansys/zender-mod-stackfood/releases).
 
 2. Upload the contents of **install** folder to the root of your StackFood admin.
 
