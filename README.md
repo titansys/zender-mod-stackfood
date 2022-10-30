@@ -1,4 +1,4 @@
-# Zender Modification for StackFood
+# Zender Mod for StackFood
 
 ![Status](https://img.shields.io/badge/status-released-blue?style=for-the-badge)
 
