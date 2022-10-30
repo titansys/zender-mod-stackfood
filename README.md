@@ -20,7 +20,7 @@ This modification is very easy to install. It is basically modified controller f
 
 2. Upload the contents of **install** folder to the root of your StackFood admin.
 
-3. Import the install.sql file into your StackFood admin database.
+3. Import the **install.sql** file into your StackFood admin database.
 
 4. Configure Zender in the StackFood admin SMS module settings.
 
