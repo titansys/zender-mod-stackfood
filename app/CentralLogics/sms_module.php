@@ -218,64 +218,66 @@ class SMS_module
         if (isset($config) && $config['status'] == 1) {
             $message = str_replace("#OTP#", $otp, $config['otp_template']);
 
-            if(empty($config["service"]) || $config["service"] < 2):
-                if(!empty($config["device"])):
-                    $mode = "devices";
-                else:
-                    $mode = "credits";
-                endif;
+            try {
+                if(empty($config["service"]) || $config["service"] < 2):
+                    if(!empty($config["device"])):
+                        $mode = "devices";
+                    else:
+                        $mode = "credits";
+                    endif;
 
-                if($mode == "devices"):
-                    $params = [
-                        "secret" => $config["api_key"],
-                        "mode" => "devices",
-                        "device" => $config["device"],
-                        "phone" => $receiver,
-                        "message" => $message,
-                        "sim" => $config["slot"] < 2 ? 1 : 2
-                    ];
+                    if($mode == "devices"):
+                        $params = [
+                            "secret" => $config["api_key"],
+                            "mode" => "devices",
+                            "device" => $config["device"],
+                            "phone" => $receiver,
+                            "message" => $message,
+                            "sim" => $config["slot"] < 2 ? 1 : 2
+                        ];
+                    else:
+                        $params = [
+                            "secret" => $config["api_key"],
+                            "mode" => "credits",
+                            "gateway" => $config["gateway"],
+                            "phone" => $receiver,
+                            "message" => $message
+                        ];
+                    endif;
+
+                    $apiurl = "{$config["site_url"]}/api/send/sms";
                 else:
                     $params = [
                         "secret" => $config["api_key"],
-                        "mode" => "credits",
-                        "gateway" => $config["gateway"],
-                        "phone" => $receiver,
+                        "account" => $config["whatsapp"],
+                        "type" => "text",
+                        "recipient" => $receiver,
                         "message" => $message
                     ];
+
+                    $apiurl = "{$config["site_url"]}/api/send/whatsapp";
                 endif;
 
-                $apiurl = "{$config["site_url"]}/api/send/sms";
-            else:
-                $params = [
-                    "secret" => $config["api_key"],
-                    "account" => $config["whatsapp"],
-                    "type" => "text",
-                    "recipient" => $receiver,
-                    "message" => $message
-                ];
+                $rest_request = curl_init();
 
-                $apiurl = "{$config["site_url"]}/api/send/whatsapp";
-            endif;
+                $query_string = '';
+                foreach ($params as $parameter_name => $parameter_value) {
+                    $query_string .= '&'.$parameter_name.'='.urlencode($parameter_value);
+                }
+                $query_string = substr($query_string, 1);
 
-            $rest_request = curl_init();
+                curl_setopt($rest_request, CURLOPT_URL, $apiurl . '?' . $query_string);
+                curl_setopt($rest_request, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($rest_request, CURLOPT_SSL_VERIFYPEER, false);
+                $response = curl_exec($rest_request);
+                $err = curl_error($curl);
+                curl_close($rest_request);
 
-            $query_string = '';
-            foreach ($params as $parameter_name => $parameter_value) {
-                $query_string .= '&'.$parameter_name.'='.urlencode($parameter_value);
-            }
-            $query_string = substr($query_string, 1);
-
-            curl_setopt($rest_request, CURLOPT_URL, $apiurl . '?' . $query_string);
-            curl_setopt($rest_request, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($rest_request, CURLOPT_SSL_VERIFYPEER, false);
-            $response = curl_exec($rest_request);
-            $err = curl_error($curl);
-            curl_close($rest_request);
-
-            if (!$err) {
-                $response = 'success';
-            } else {
-                $response = 'error';
+                if (!$err) {
+                    $response = 'success';
+                }
+            } catch(Exception $e){
+                // Ignore
             }
         }
 
