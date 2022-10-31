@@ -26,6 +26,16 @@ This modification is very easy to install. It is basically modified controller f
 
 5. All done!
 
+## Updating
+
+This modification is very easy to update.
+
+1. Download the latest release.zip file from [here](https://github.com/titansys/zender-mod-stackfood/releases).
+
+2. Upload the contents of **install** folder to the root of your StackFood.
+
+3. All done!
+
 ## Disclaimer
 
 Titan Systems is in no way affiliated with the author of StackFood script, please use this modification in your own discretion.

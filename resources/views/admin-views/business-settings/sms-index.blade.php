@@ -102,8 +102,8 @@
                                     <label class="text-capitalize form-label">Sim Slot</label><br>
                                     <small>For SMS service only. Select the sim slot you want to use for sending the messages. Please only enter this field if you are sending using a partner device or third party gateway. This is ignored for partner devices and third party gateways.</small>
                                     <select class="form-control" name="slot">
-                                        <option value="sim1" {{$config['slot'] == "sim1" ? "selected" : false}}>SIM 1</option>
-                                        <option value="sim2" {{$config['slot'] == "sim2" ? "selected" : false}}>SIM 2</option>
+                                        <option value="1" {{$config['slot'] < 2 ? "selected" : false}}>SIM 1</option>
+                                        <option value="2" {{$config['slot'] > 1 ? "selected" : false}}>SIM 2</option>
                                     </select>
                                 </div>
 
