@@ -213,7 +213,6 @@ class SMS_module
     public static function zender_gateway($receiver, $otp)
     {
         $config = self::get_settings('zender_gateway');
-
         $response = 'error';
         if (isset($config) && $config['status'] == 1) {
             $message = str_replace("#OTP#", $otp, $config['otp_template']);
@@ -270,17 +269,16 @@ class SMS_module
                 curl_setopt($rest_request, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($rest_request, CURLOPT_SSL_VERIFYPEER, false);
                 $response = curl_exec($rest_request);
-                $err = curl_error($curl);
+                $err = curl_error($rest_request);
                 curl_close($rest_request);
 
                 if (!$err) {
                     $response = 'success';
                 }
-            } catch(Exception $e){
+            } catch(\Exception $e){
                 // Ignore
             }
         }
-
         return $response;
     }
 
